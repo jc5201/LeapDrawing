@@ -10,11 +10,6 @@ public class ObjectHandler : MonoBehaviour {
     void Start () {
         script = GameObject.Find("Canvas").GetComponent<ObjectControl>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void OnMouseDown()
     {

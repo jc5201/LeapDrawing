@@ -1003,6 +1003,7 @@ GameObject:
   - component: {fileID: 1052609689}
   - component: {fileID: 1052609688}
   - component: {fileID: 1052609687}
+  - component: {fileID: 1052609690}
   m_Layer: 5
   m_Name: RotateImageButton
   m_TagString: Untagged
@@ -1103,6 +1104,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1052609685}
   m_CullTransparentMesh: 0
+--- !u!114 &1052609690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1052609685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d870e3930998934499e7c914be22882d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  isPressed: 0
 --- !u!1 &1206053113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,8 +1128,9 @@ GameObject:
   - component: {fileID: 1206053117}
   - component: {fileID: 1206053116}
   - component: {fileID: 1206053115}
+  - component: {fileID: 1206053118}
   m_Layer: 5
-  m_Name: moveImageButton
+  m_Name: MoveImageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1214,6 +1229,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1206053113}
   m_CullTransparentMesh: 0
+--- !u!114 &1206053118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1206053113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d870e3930998934499e7c914be22882d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  isPressed: 0
 --- !u!1 &1251124802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,6 +1253,7 @@ GameObject:
   - component: {fileID: 1251124805}
   - component: {fileID: 1251124804}
   - component: {fileID: 1251124806}
+  - component: {fileID: 1251124807}
   m_Layer: 5
   m_Name: CubeImageButton
   m_TagString: Untagged
@@ -1325,6 +1354,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1251124807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1251124802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d870e3930998934499e7c914be22882d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1645662658355346, guid: 7c5ba2ebddb5aae438280d2e2e0f89c6, type: 2}
+  isPressed: 0
 --- !u!1 &1325830794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,6 +2162,7 @@ GameObject:
   - component: {fileID: 1387028463}
   - component: {fileID: 1387028462}
   - component: {fileID: 1387028461}
+  - component: {fileID: 1387028464}
   m_Layer: 5
   m_Name: CylinderImageButton
   m_TagString: Untagged
@@ -2220,6 +2263,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1387028459}
   m_CullTransparentMesh: 0
+--- !u!114 &1387028464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387028459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d870e3930998934499e7c914be22882d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  isPressed: 0
 --- !u!1001 &1476619789
 Prefab:
   m_ObjectHideFlags: 0
@@ -2277,7 +2333,7 @@ GameObject:
   - component: {fileID: 1482414603}
   - component: {fileID: 1482414602}
   - component: {fileID: 1482414601}
-  - component: {fileID: 1482414605}
+  - component: {fileID: 1482414606}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2365,7 +2421,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1482414605
+--- !u!114 &1482414606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2373,11 +2429,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1482414600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d870e3930998934499e7c914be22882d, type: 3}
+  m_Script: {fileID: 11500000, guid: 567f9f47eab992c418caf5abec7e4a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CubePrefab: {fileID: 1645662658355346, guid: 7c5ba2ebddb5aae438280d2e2e0f89c6, type: 2}
-  CylinderPrefab: {fileID: 0}
 --- !u!1001 &1555061049
 Prefab:
   m_ObjectHideFlags: 0
@@ -2435,6 +2489,7 @@ GameObject:
   - component: {fileID: 1577059638}
   - component: {fileID: 1577059637}
   - component: {fileID: 1577059636}
+  - component: {fileID: 1577059639}
   m_Layer: 5
   m_Name: ScaleImageButton
   m_TagString: Untagged
@@ -2535,6 +2590,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1577059634}
   m_CullTransparentMesh: 0
+--- !u!114 &1577059639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1577059634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d870e3930998934499e7c914be22882d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  isPressed: 0
 --- !u!1 &1626687682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,7 +2749,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1776077979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3.15}
+  m_LocalPosition: {x: 0, y: 0.51, z: -3.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -32,79 +32,53 @@ using UnityEditor;
 /// </summary>
 public class CustomHandModelManager : Leap.Unity.HandModelManager
 {
-    protected NetworkServer server;
+    private Vector3 invalidVector = new Vector3(-999, -999, -999);
+    private Quaternion invalidQuar = new Quaternion(-999, -999, -999, -999);
 
-    override void Start()
-    {
-        base.Start();
-        server.Listen(32389);
-    }
+    private Vector3 savedPalmPosition1;
+    private Vector3 savedPalmPosition2;
 
+    private Quaternion savedRotation1;
+    private Quaternion savedRotation2;
 
     protected override void OnUpdateFrame(Frame frame)
     {
         base.OnUpdateFrame(frame);
-        SendDataToClient(frame);
-        for (int i = 0; i < frame.Hands.Count; i++)
-        {
-            Hand curHand = frame.Hands[i];
-            if (curHand.IsLeft)
-            {
 
-                Debug.Log("Left Hand tip position: " + curHand.Fingers[1].TipPosition.ToString());
-            }
-            else
-            {
-                Debug.Log("Right Hand: ");
-            }
+        savedPalmPosition2 = savedPalmPosition1;
+        savedRotation2 = savedRotation1;
+        if (frame.Hands.Count != 1 || !frame.Hands[0].IsLeft)
+        {
+            savedPalmPosition1 = invalidVector;
+            savedRotation1 = invalidQuar;
+        }
+        else
+        {
+            savedPalmPosition1 = UnityVectorExtension.ToVector3(frame.Hands[0].PalmPosition);
+            savedRotation1 = ToQuaternion(frame.Hands[0].Rotation);
         }
     }
 
-
-
-    public class HandPositionMessage : MessageBase
+    public Vector3 deltaMovement()
     {
-        bool leftHandExists;
-        Vector leftIndexFingerTip;
-        bool rightHandExists;
-        Vector rightIndexFingerTip;
-
-        HandPositionMessage(Frame frame)
-        {
-            leftHandExists = false;
-            rightHandExists = false;
-            foreach (Hand curHand in frame.Hands)
-            {
-                if (curHand.IsLeft)
-                {
-                    leftHandExists = true;
-                    leftIndexFingerTip = curHand.Fingers[1].TipPosition;
-                }
-                else
-                {
-                    rightHandExists = true;
-                    rightIndexFingerTip = curHand.Fingers[1].TipPosition;
-                }
-            }
-        }
+        // Debug.Log(savedPalmPosition1 + " and " + savedPalmPosition2);
+        if (savedPalmPosition1 == invalidVector || savedPalmPosition2 == invalidVector)
+            return new Vector3(0, 0, 0);
+        return savedPalmPosition1 - savedPalmPosition2;
     }
 
-    public class MyMessageTypes
+    public Quaternion deltaRotation()
     {
-        public static short frame = 1001;
-        public static short connect = 1002;
-    };
-
-    void SendDataToClient(Frame frame)
-    {
-        if(server.connections.Count != 0)
-        {
-            msg = new HandPositionMessage(frame);
-
-            server.sendToAll(MyMessageTypes.frame, msg);
-        }
+        if (savedRotation1 == invalidQuar || savedRotation2 == invalidQuar)
+            return Quaternion.identity;
+        return Quaternion.Inverse(savedRotation2) * savedRotation1;
     }
-    
+
+    public Quaternion ToQuaternion(LeapQuaternion q)
+    {
+        return new Quaternion(q.x, q.y, q.z, q.w);
+    }
+
 
 }
 

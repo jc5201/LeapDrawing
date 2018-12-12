@@ -26,7 +26,11 @@ public class ObjectControl : MonoBehaviour {
         {
             if (moveButtonHandler.isPressed)
             {
-
+                focused.transform.position = focused.transform.position + handModelManager.deltaMovement() * Time.deltaTime * 100;
+            }
+            if (rotateButtonHandler.isPressed)
+            {
+                focused.transform.rotation = focused.transform.rotation * handModelManager.deltaRotation();
             }
         }
 	}
