@@ -32,6 +32,10 @@ public class ObjectControl : MonoBehaviour {
             {
                 focused.transform.rotation = focused.transform.rotation * handModelManager.deltaRotation();
             }
+            if (scaleButtonHandler.isPressed)
+            {
+                focused.transform.localScale = focused.transform.localScale - handModelManager.deltaFinger() * Time.deltaTime * 100;
+            }
         }
 	}
 

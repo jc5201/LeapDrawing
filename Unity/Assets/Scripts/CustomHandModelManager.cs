@@ -41,21 +41,28 @@ public class CustomHandModelManager : Leap.Unity.HandModelManager
     private Quaternion savedRotation1;
     private Quaternion savedRotation2;
 
+    private Vector3 savedFingerDistance1;
+    private Vector3 savedFingerDistance2;
+
     protected override void OnUpdateFrame(Frame frame)
     {
         base.OnUpdateFrame(frame);
 
         savedPalmPosition2 = savedPalmPosition1;
         savedRotation2 = savedRotation1;
+        savedFingerDistance2 = savedFingerDistance1;
         if (frame.Hands.Count != 1 || !frame.Hands[0].IsLeft)
         {
             savedPalmPosition1 = invalidVector;
             savedRotation1 = invalidQuar;
+            savedFingerDistance1 = invalidVector;
         }
         else
         {
             savedPalmPosition1 = UnityVectorExtension.ToVector3(frame.Hands[0].PalmPosition);
             savedRotation1 = ToQuaternion(frame.Hands[0].Rotation);
+            savedFingerDistance1 = UnityVectorExtension.ToVector3(frame.Hands[0].Fingers[1].TipPosition)
+                - UnityVectorExtension.ToVector3(frame.Hands[0].Fingers[0].TipPosition);
         }
     }
 
@@ -72,6 +79,14 @@ public class CustomHandModelManager : Leap.Unity.HandModelManager
         if (savedRotation1 == invalidQuar || savedRotation2 == invalidQuar)
             return Quaternion.identity;
         return Quaternion.Inverse(savedRotation2) * savedRotation1;
+    }
+
+    public Vector3 deltaFinger()
+    {
+        if (savedFingerDistance1 == invalidVector || savedFingerDistance2 == invalidVector)
+            return new Vector3(0, 0, 0);
+        Vector3 distance = savedFingerDistance1 - savedFingerDistance2;
+        return new Vector3(distance.x, -1 * distance.y, -1 * distance.z);
     }
 
     public Quaternion ToQuaternion(LeapQuaternion q)
