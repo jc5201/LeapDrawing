@@ -16,4 +16,5 @@ public class ObjectHandler : MonoBehaviour {
         Debug.Log("object focused");
         script.Focus(gameObject);
     }
+
 }

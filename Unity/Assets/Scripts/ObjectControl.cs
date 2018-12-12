@@ -9,6 +9,9 @@ public class ObjectControl : MonoBehaviour {
     private ButtonHandler scaleButtonHandler;
     private CustomHandModelManager handModelManager;
 
+    public Material defaultMaterial;
+    public Material focusedMaterial;
+
     private GameObject focused;
 
     // Use this for initialization
@@ -30,17 +33,20 @@ public class ObjectControl : MonoBehaviour {
             }
             if (rotateButtonHandler.isPressed)
             {
-                focused.transform.rotation = focused.transform.rotation * handModelManager.deltaRotation();
+                focused.transform.rotation =  handModelManager.deltaRotation() * focused.transform.rotation;
             }
             if (scaleButtonHandler.isPressed)
             {
-                focused.transform.localScale = focused.transform.localScale - handModelManager.deltaFinger() * Time.deltaTime * 100;
+                focused.transform.localScale = focused.transform.localScale + focused.transform.rotation * handModelManager.deltaFinger() * Time.deltaTime * 200 ;
             }
         }
 	}
 
     public void Focus(GameObject target)
     {
+        if(focused != null)
+            focused.GetComponent<MeshRenderer>().material = defaultMaterial;
         focused = target;
+        focused.GetComponent<MeshRenderer>().material = focusedMaterial;
     }
 }

@@ -63,6 +63,7 @@ public class CustomHandModelManager : Leap.Unity.HandModelManager
             savedRotation1 = ToQuaternion(frame.Hands[0].Rotation);
             savedFingerDistance1 = UnityVectorExtension.ToVector3(frame.Hands[0].Fingers[1].TipPosition)
                 - UnityVectorExtension.ToVector3(frame.Hands[0].Fingers[0].TipPosition);
+            savedFingerDistance1 = new Vector3(Mathf.Abs(savedFingerDistance1.x), Mathf.Abs(savedFingerDistance1.y), Mathf.Abs(savedFingerDistance1.z));
         }
     }
 
@@ -86,7 +87,7 @@ public class CustomHandModelManager : Leap.Unity.HandModelManager
         if (savedFingerDistance1 == invalidVector || savedFingerDistance2 == invalidVector)
             return new Vector3(0, 0, 0);
         Vector3 distance = savedFingerDistance1 - savedFingerDistance2;
-        return new Vector3(distance.x, -1 * distance.y, -1 * distance.z);
+        return new Vector3(distance.x, distance.y, distance.z);
     }
 
     public Quaternion ToQuaternion(LeapQuaternion q)
