@@ -11,19 +11,22 @@ public class ButtonHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public GameObject prefab;
 
     public bool isPressed;
+    private bool isInstanceButton;
 
     // Use this for initialization
     void Start ()
     {
         Debug.Log("ButtonHandler init" + gameObject.name);
-        gameObject.GetComponent<Button>().onClick.AddListener(OnClickButton);
+        isInstanceButton = gameObject.name == "CubeImageButton" || gameObject.name == "CylinderImageButton";
+        if (isInstanceButton)
+            gameObject.GetComponent<Button>().onClick.AddListener(OnClickButton);
 
         isPressed = false;
     }
 
     private void OnClickButton()
     {
-        Debug.Log("I was clicked");
+        // Debug.Log("I was clicked");
         GameObject newCube = instantiate(prefab);
     }
 
@@ -34,17 +37,17 @@ public class ButtonHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerDown(PointerEventData e)
     {
-        Debug.Log("pointer down");
+        // Debug.Log("pointer down");
         isPressed = true;
     }
     public void OnPointerExit()
     {
-        Debug.Log("pointer exit");
+        // Debug.Log("pointer exit");
         isPressed = false;
     }
     public void OnPointerUp(PointerEventData e)
     {
-        Debug.Log("pointer up");
+        // Debug.Log("pointer up");
         isPressed = false;
     }
 }
