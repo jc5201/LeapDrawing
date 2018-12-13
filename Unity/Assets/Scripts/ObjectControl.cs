@@ -49,4 +49,8 @@ public class ObjectControl : MonoBehaviour {
         focused = target;
         focused.GetComponent<MeshRenderer>().material = focusedMaterial;
     }
+
+    public GameObject getFocusedObject(){
+        return focused;
+    }
 }

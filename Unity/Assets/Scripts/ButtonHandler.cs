@@ -20,6 +20,9 @@ public class ButtonHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         isInstanceButton = gameObject.name == "CubeImageButton" || gameObject.name == "CylinderImageButton";
         if (isInstanceButton)
             gameObject.GetComponent<Button>().onClick.AddListener(OnClickButton);
+        
+        if(gameObject.name == "DeleteImageButton")
+            gameObject.GetComponent<Button>().onClick.AddListener(OnClickDeleteButton);
 
         isPressed = false;
     }
@@ -28,6 +31,14 @@ public class ButtonHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         // Debug.Log("I was clicked");
         GameObject newCube = instantiate(prefab);
+    }
+
+    private void OnClickDeleteButton()
+    {
+        GameObject target = GameObject.Find("Canvas").GetComponent<ObjectControl>().getFocusedObject();
+        if (target != null){
+            Destroy(target, 0);
+        }
     }
 
     private GameObject instantiate(GameObject prefab)
