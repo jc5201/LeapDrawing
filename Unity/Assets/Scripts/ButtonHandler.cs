@@ -15,12 +15,8 @@ public class ButtonHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     // Use this for initialization
     void Start ()
     {
-        Debug.Log("ButtonHandler init");
-        Debug.Log(gameObject.name);
-        if (gameObject.name == "CubeImageButton")
-        {
-            gameObject.GetComponent<Button>().onClick.AddListener(OnClickButton);
-        }
+        Debug.Log("ButtonHandler init" + gameObject.name);
+        gameObject.GetComponent<Button>().onClick.AddListener(OnClickButton);
 
         isPressed = false;
     }
